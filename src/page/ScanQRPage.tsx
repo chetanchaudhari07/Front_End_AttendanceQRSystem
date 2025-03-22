@@ -29,7 +29,7 @@ const ScanQRPage = () => {
 
            
             const response = await axios.post(
-              `http://localhost:8000/attendance/markAttendance/${employeeId}`,
+              `https://attendanceqrsystem.onrender.com/attendance/markAttendance/${employeeId}`,
               { latitude, longitude },
               { headers: { Authorization: `Bearer ${token}` } }
             );

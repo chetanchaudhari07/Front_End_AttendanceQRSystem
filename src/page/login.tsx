@@ -17,7 +17,7 @@ const Login = () => {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:8000/auth/login", {
+      const res = await axios.post("https://attendanceqrsystem.onrender.com/auth/login", {
         email,
         password,
         role,
