@@ -17,7 +17,7 @@ const QRCodePage = () => {
         }
 
         const res = await axios.get(
-          `https://attendanceqrsystem.onrender.com/qr/generate-qr/${employeeId}`,
+          `http://localhost:8000/qr/generate-qr/${employeeId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -35,7 +35,7 @@ const QRCodePage = () => {
   console.log(qrCode);
 
    return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-black">
       {error ? (
         <p className="text-red-500">{error}</p>
       ) : qrCode ? (

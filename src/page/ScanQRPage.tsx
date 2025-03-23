@@ -17,7 +17,7 @@ const ScanQRPage = () => {
 
       if (!employeeId) {
         alert("Invalid QR code! Employee ID is missing.");
-        navigate("/");
+        
         return;
       }
 
@@ -29,22 +29,32 @@ const ScanQRPage = () => {
 
            
             const response = await axios.post(
-              `https://attendanceqrsystem.onrender.com/attendance/markAttendance/${employeeId}`,
+              `http://localhost:8000/attendance/markAttendance/${employeeId}`,
               { latitude, longitude },
               { headers: { Authorization: `Bearer ${token}` } }
             );
 
             alert(response.data.message);
-            navigate("/");
+            
+
+            setTimeout(()=>{
+                window.close();
+
+            },1000)
           },
           () => {
             alert("Location permission denied. Please enable GPS.");
             isMarkedRef.current = false;
           }
         );
-      } catch (error: any) {
-        alert(error.response?.data?.message || "Failed to mark attendance.");
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          alert(error.response?.data?.message || "Failed to mark attendance.");
+        } else {
+          alert("Failed to mark attendance.");
+        }
         isMarkedRef.current = false;
+            window.close();
       }
     };
 
